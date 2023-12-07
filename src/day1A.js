@@ -49,4 +49,4 @@ organisedData.forEach(datum => {
 });
 
 // Exports
-export { data1, answer1A };
+export { data1, calibrationCode, answer1A };

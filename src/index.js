@@ -7,5 +7,5 @@ import { answer1A } from "./day1A";
 import { answer1B } from "./day1B";
 
 // Print answers
-console.log(answer1A);
-console.log(answer1B);
+console.log(`Day 1 Part 1: ${answer1A}`);
+console.log(`Day 1 Part 2: ${answer1B}`);
