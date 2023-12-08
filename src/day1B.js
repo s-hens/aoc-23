@@ -6,7 +6,7 @@
 // Imports
 import { data1, calibrationCode } from "./day1A";
 
-// Test data, total should be 364
+// Test data, should be 634
 const testData = [
     "two1nine",
     "eightwothree",
@@ -15,7 +15,13 @@ const testData = [
     "4nineeightseven2",
     "zoneight234",
     "7pqrstsixteen",
-    "eighthree"]
+    "eighthree",
+    "twone",
+    "vj3",
+    "ninefivenine2fiveb",
+    "eight",
+    "threesix4hcsnpdfqksfour5three"
+]
 
 // Define valid spelled-out digits
 const spelledOutDigits = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
@@ -40,13 +46,22 @@ testData.forEach (datum => {
         }
     }
     // Find first and last spelled-out digits. Check if their indices give them priority over the numerical digits
+    // Do it twice to catch overlaps (ex. "eightwo") or spelled-out digits that count twice (ex. "eight")
     spelledOutDigits.forEach(digit => {
         if ((code.includes(digit) && !digit1) || code.includes(digit) && (code.indexOf(digit) < code.indexOf(digit1))) {
             digit1 = digit;
         } else if (code.includes(digit) && (code.lastIndexOf(digit) > code.indexOf(digit2))) {
             digit2 = digit;
         }
+        
+        if ((code.includes(digit) && !digit1) || code.includes(digit) && (code.indexOf(digit) < code.indexOf(digit1))) {
+            digit1 = digit;
+        } else if (code.includes(digit) && (code.lastIndexOf(digit) > code.lastIndexOf(digit2))) {
+            digit2 = digit;
+        }
     })
+
+    /* Somewhere HERE is where digit2 gets fucked in some cases. But how? */
 
     // If digit1 or digit2 is spelled-out, make it numerical
     if (!Number.isInteger(Number(digit1))) {
@@ -59,6 +74,7 @@ testData.forEach (datum => {
     // The calibration value is still digit1 and digit 2 concatenated
     let calibrationValue = Number(`${digit1}${digit2}`);
 
+    //console.log(digit1, digit2, calibrationValue);
     const newCalibrationCode = calibrationCode(code, digit1, digit2, calibrationValue);
     organisedData.push(newCalibrationCode);
 })
@@ -66,7 +82,7 @@ testData.forEach (datum => {
 let answer1B = 0;
 
 organisedData.forEach(datum => {
-    //console.log(datum.calibrationValue);
+    console.log(datum.code, datum.digit1, datum.digit2, datum.calibrationValue);
     answer1B = answer1B + datum.calibrationValue;
 });
 
