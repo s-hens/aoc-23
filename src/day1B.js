@@ -6,7 +6,7 @@
 // Imports
 import { data1, calibrationCode } from "./day1A";
 
-// Test data, should be 634
+// Test data, total should be 613
 const testData = [
     "two1nine",
     "eightwothree",
@@ -16,77 +16,27 @@ const testData = [
     "zoneight234",
     "7pqrstsixteen",
     "eighthree",
-    "twone",
+    "eight",
     "vj3",
     "ninefivenine2fiveb",
-    "eight",
     "threesix4hcsnpdfqksfour5three"
-]
+];
 
-// Define valid spelled-out digits
-const spelledOutDigits = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+// Regex to find first digit
+let regexFirst = /\d|one|two|three|four|five|six|seven|eight|nine/;
 
-// Once again, using a factory function to organise the data
-const organisedData = [];
+// Regex to find last digit
+let regexLast = /^.*(\d|one|two|three|four|five|six|seven|eight|nine)(?=[^.]*$)/;
 
-testData.forEach (datum => {
-    const code = datum;
-    let digit1;
-    let digit2;
 
-    // Find first and last numerical digits
-    for (let i = 0; i < code.length; i++) {
-        if (Number.isInteger(Number(code[i])) && !digit1) {
-            digit1 = code[i];
-        } else if (Number.isInteger(Number(code[i])) && digit1) {
-            digit2 = code[i];
-        }
-        if (!digit2) {
-            digit2 = digit1;
-        }
-    }
-    // Find first and last spelled-out digits. Check if their indices give them priority over the numerical digits
-    // Do it twice to catch overlaps (ex. "eightwo") or spelled-out digits that count twice (ex. "eight")
-    spelledOutDigits.forEach(digit => {
-        if ((code.includes(digit) && !digit1) || code.includes(digit) && (code.indexOf(digit) < code.indexOf(digit1))) {
-            digit1 = digit;
-        } else if (code.includes(digit) && (code.lastIndexOf(digit) > code.indexOf(digit2))) {
-            digit2 = digit;
-        }
-        
-        if ((code.includes(digit) && !digit1) || code.includes(digit) && (code.indexOf(digit) < code.indexOf(digit1))) {
-            digit1 = digit;
-        } else if (code.includes(digit) && (code.lastIndexOf(digit) > code.lastIndexOf(digit2))) {
-            digit2 = digit;
-        }
-    })
-
-    /* Somewhere HERE is where digit2 gets fucked in some cases. But how? */
-
-    // If digit1 or digit2 is spelled-out, make it numerical
-    if (!Number.isInteger(Number(digit1))) {
-        digit1 = spelledOutDigits.indexOf(digit1) + 1;
-    }
-    if (!Number.isInteger(Number(digit2))) {
-        digit2 = spelledOutDigits.indexOf(digit2) + 1;
-    }
-
-    // The calibration value is still digit1 and digit 2 concatenated
-    let calibrationValue = Number(`${digit1}${digit2}`);
-
-    //console.log(digit1, digit2, calibrationValue);
-    const newCalibrationCode = calibrationCode(code, digit1, digit2, calibrationValue);
-    organisedData.push(newCalibrationCode);
-})
-
-let answer1B = 0;
-
-organisedData.forEach(datum => {
-    console.log(datum.code, datum.digit1, datum.digit2, datum.calibrationValue);
-    answer1B = answer1B + datum.calibrationValue;
+testData.forEach(string => {
+    console.log(string);
+    console.log(string.match(regexFirst).at(0));
+    console.log(string.match(regexLast).at(string.match(regexLast).length - 1));
 });
 
-console.log(answer1B);
+const answer1B = "idk";
 
 // Exports
 export { answer1B };
+
