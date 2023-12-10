@@ -22,17 +22,19 @@ const testData = [
     "threesix4hcsnpdfqksfour5three"
 ];
 
-// Regex to find first digit
-let regexFirst = /\d|one|two|three|four|five|six|seven|eight|nine/;
-
-// Regex to find last digit
-let regexLast = /^.*(\d|one|two|three|four|five|six|seven|eight|nine)(?=[^.]*$)/;
-
+let regex = /(?=(\d|one|two|three|four|five|six|seven|eight|nine))/g;
 
 testData.forEach(string => {
-    console.log(string);
-    console.log(string.match(regexFirst).at(0));
-    console.log(string.match(regexLast).at(string.match(regexLast).length - 1));
+    
+    // Use matchAll because it works with global matching
+    // Convert to array because matchAll returns an iterator
+    // Get just the info we need from that array
+
+    let matches = Array.from(string.matchAll(regex), (match) => match[1]);
+    let digit1 = matches.at(0);
+    let digit2 = matches.at(matches.length - 1);
+    console.log(string, digit1, digit2);
+
 });
 
 const answer1B = "idk";
