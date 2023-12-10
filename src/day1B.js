@@ -52,8 +52,6 @@ data1.forEach(string => {
     answer1B = answer1B + calibrationValue;
 });
 
-console.log(answer1B);
-
 // Exports
 export { answer1B };
 
