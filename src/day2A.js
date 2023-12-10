@@ -20,12 +20,6 @@ const redRegex = /(\d+)(?= red)/gm;
 const greenRegex = /(\d+)(?= green)/gm;
 const blueRegex = /(\d+)(?= blue)/gm;
 
-// Example of regex use: red detector
-// Input: 5 green, 6 blue, 1 red
-// Output: 1
-//let test = Array.from(data2Formatted[0][1].match(redRegex));
-//console.log(test[0]);
-
 let games = [];
 
 const game = (id, reds, blues, greens) => {
@@ -57,4 +51,19 @@ data2a.forEach(day => {
     games.push(newGame);
 })
 
-console.log(games);
+// OK, the data is finally in a format that's easy to manipulate
+// Now we are looking for the sum of the IDs of passing games
+let answer2A = 0;
+
+games.forEach(game => {    
+    let blues = game.blues.find(n => n > 14);
+    let greens = game.greens.find(n => n > 13);
+    let reds = game.reds.find(n => n > 12);
+
+    if (!blues && !reds && !greens) {
+        answer2A = answer2A + game.id;
+    }
+})
+
+// Exports
+export { answer2A };
