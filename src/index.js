@@ -3,11 +3,11 @@
 /////////////////////////
 
 // Imports
-import { answer1A } from "./day1A";
-import { answer1B } from "./day1B";
-import { answer2A } from "./day2A";
+import { answer1A } from "./day1.1";
+import { answer1B } from "./day1.2";
+import { answer2A } from "./day2.1";
 
 // Print answers
-console.log(`Day 1 Part 1: ${answer1A}`);
-console.log(`Day 1 Part 2: ${answer1B}`);
-console.log(`Day 2 Part 1: ${answer2A}`);
+console.log(`1.1: ${answer1A}`);
+console.log(`1.2: ${answer1B}`);
+console.log(`2.1: ${answer2A}`);

@@ -1,10 +1,10 @@
 /////////////////////////
 // Advent of Code 2023 //
-// Day 1 Part 2        //
+// Day 1.2             //
 /////////////////////////
 
 // Imports
-import { data1, calibrationCode } from "./day1A";
+import { data1 } from "./day1.1";
 
 // Test data, total should be 613
 const testData = [
